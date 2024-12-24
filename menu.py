@@ -1,4 +1,3 @@
-import music_meta_manager
 from music_meta_manager import remove_unknown, troca_artist, define_artist, preenche_titulo
 
 opeacao = ""
