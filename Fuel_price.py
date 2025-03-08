@@ -1,11 +1,12 @@
 def calcular_custo_viagem():
     print("========== Calculadora de Custo de Combustível ==========")
 
+#47L
     try:
         distancia = float(input("Informe a distância percorrida (em km): "))
 
         print("""
-        0 - Preço do combustivel 6,63
+        0 - Preço do combustivel 6,36
         1 - Personalizado
         """)
 
@@ -30,7 +31,7 @@ def calcular_custo_viagem():
         if op2 == "0":
             autonomia = 13.7
         elif op2 == "1":
-            autonomia = 13.7
+            autonomia = 15
         elif op2 == "2":
             autonomia = float(input("Informe a autonomia do veículo (km/litro): "))
         else:
@@ -42,7 +43,17 @@ def calcular_custo_viagem():
 
         custo = (distancia / autonomia) * preco_combustivel
 
-        print(f"\n========== Resultado ==========\nDistancia: {distancia}Km\nCusto: R$ {custo:.2f}")
+        capacidade_combustivel = 47
+
+        litros = round(distancia / autonomia)
+
+        porcentagem = round((distancia / (autonomia * capacidade_combustivel)) * 100)
+
+        print(f"\n========== Resultado ==========\n"
+              f"Distancia: {distancia}Km\n"
+              f"Custo: R$ {custo:.2f}\n"
+              f"Litros gastos: {litros}L\n"
+              f"Porcentagem de gasto do tanque: {porcentagem}%")
 
     except ValueError:
         print("Por favor, insira apenas números válidos.")

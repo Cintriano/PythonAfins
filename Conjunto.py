@@ -5,10 +5,11 @@ class Conjunto:
     def inserir(self, elemento):
         self.conjunto.append(elemento)
 
-    def comtem(self, elemento):
+    def contem(self, elemento):
         if elemento in self.conjunto:
             return True
         return False
 
     def __str__(self):
-        return f"A = {{self.conjunto}}"
+        conjunto_formatado = "{" + ",".join(map(str,self.conjunto)) + "}"
+        return f" = {conjunto_formatado}"
