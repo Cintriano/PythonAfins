@@ -1,9 +1,12 @@
+import socket
+import re
+
 """
-        192.168.0.1
-        Classe A 1:126
-        Classe B 128:191
-        Classe C 192:223
-        """
+    Ex: 192.168.0.1
+    Classe A 1:126
+    Classe B 128:191
+    Classe C 192:223
+"""
 
 def ip_reader(ip):
 
@@ -43,7 +46,43 @@ def ip_reader(ip):
     except Exception as e:
         print("Erro: ", e)
 
-if __name__ == "__main__":
-    ip_input = "128.168.1.1"
 
-    ip_reader(ip_input)
+def validar_ip(ip):
+    padrao_ip = r"^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$"
+
+    if re.match(padrao_ip, ip):
+        octetos = ip.split('.')
+        for octeto in octetos:
+            if not 0 <= int(octeto) <= 255:
+                return False
+        return True
+    else:
+        return False
+
+
+if __name__ == "__main__":
+
+    ip_input = ""
+
+    print("""
+    0 - Ip da Maquina
+    1 - Ip Personalizado
+    """)
+
+    op = input("Opção: ")
+
+    if op == "0":
+        hostname = socket.gethostname()
+        ip_input = socket.gethostbyname(hostname)
+        ip_reader(ip_input)
+    elif op == "1":
+        ip_input = input("Digite o IP: ")
+        if validar_ip(ip_input):
+            ip_reader(ip_input)
+        else:
+            print("IP invalido")
+    else:
+        print("Opção invalida")
+
+
+
