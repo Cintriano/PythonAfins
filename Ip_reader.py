@@ -59,10 +59,57 @@ def validar_ip(ip):
     else:
         return False
 
+"""
+    ID: 192.168.0.0
+    Classe: A
+    Mascara: 255.255.255.128
+    CIDR: 25
+    BroadCast: 192.168.0.127
+    Conexoes: 128
+    UsefullRage: 192.168.0.1  192.168.0.126
+"""
+
+def cidr_masc_end(busca, aux):
+    dic = {24:0, 25:128, 26:192, 27:224, 28:240, 29:248, 30:252, 31:254, 32:255}
+    if aux == "cidr":
+        for key, value in dic.items():
+            if value == busca:
+                return key
+    elif aux == "masc_end":
+        for key,value in dic.items():
+            if key == busca:
+                return value
+    else:
+        return "valores invalidos"
+
+
+# redes = [[2, 64], [1, 128]]
+# div_redes = [["A", 0, 63],["B", 64, 127], ["C", 128, 255]]
+def divisao(redes, cidr):
+    alph = ["A", "B", "C", "D", "E", "F", "G"]
+    div_redes = []
+    nome_idx = 0
+    aux = 0
+    if cidr == 24:
+        for i in range(len(redes)):
+            for j in range(redes[i][0]):
+                inter_inicial = aux
+                inter_final = aux + redes[i][1] - 1
+                aux = inter_final + 1
+                div_redes.append([alph[nome_idx], inter_inicial, inter_final])
+                nome_idx += 1
+        return div_redes
+    else:
+        return "Valores invalidos"
+
+
+
 
 if __name__ == "__main__":
 
-    ip_input = ""
+    print(divisao([[4, 16], [2, 32], [1, 128]], 24))
+
+    '''ip_input = ""
 
     print("""
     0 - Ip da Maquina
@@ -82,7 +129,4 @@ if __name__ == "__main__":
         else:
             print("IP invalido")
     else:
-        print("Opção invalida")
-
-
-
+        print("Opção invalida")'''
