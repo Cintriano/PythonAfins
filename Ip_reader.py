@@ -85,8 +85,8 @@ def cidr_masc_end(busca, aux):
 
 # redes = [[2, 64], [1, 128]]
 # div_redes = [["A", 0, 63],["B", 64, 127], ["C", 128, 255]]
-def divisao(redes, cidr):
-    alph = ["A", "B", "C", "D", "E", "F", "G"]
+def divisao(id_rede, redes, cidr):
+    alph = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     div_redes = []
     nome_idx = 0
     aux = 0
@@ -98,16 +98,39 @@ def divisao(redes, cidr):
                 aux = inter_final + 1
                 div_redes.append([alph[nome_idx], inter_inicial, inter_final])
                 nome_idx += 1
-        return div_redes
+        pos(id_rede, div_redes)
+        return "\n==================== Finalizado ===================="
     else:
         return "Valores invalidos"
+
+
+# div_redes = [["A", 0, 63],["B", 64, 127], ["C", 128, 255]]
+def pos(id_rede, redes):
+    octetos = id_rede.split(".")[0:3]
+    octetos = ".".join(octetos) + "."
+    for rede in redes:
+        broadcast = octetos + str(rede[2])
+        id_rede = octetos + str(rede[1])
+        usefull_rage = octetos + str(rede[1]+1) +" -> "+ octetos + str(rede[2]-1)
+        qt_conexoes = (rede[2] - rede[1]) + 1
+        masc = "255.255.255." + str(256 - qt_conexoes)
+        cidr = cidr_masc_end((256 - qt_conexoes), "cidr")
+        print(
+            f"""
+        Rede: {rede[0]}
+        Quantidade de Conexões: {qt_conexoes}
+        ID-rede: {id_rede}
+        Broadcast: {broadcast}
+        Usefull range: {usefull_rage}
+        Mascara: {masc}
+        CIDR: {cidr}""")
 
 
 
 
 if __name__ == "__main__":
 
-    print(divisao([[4, 16], [2, 32], [1, 128]], 24))
+    print(divisao("201.109.100.0",[[4, 16], [2, 32], [1, 128]], 24))
 
     '''ip_input = ""
 
