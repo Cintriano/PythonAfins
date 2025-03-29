@@ -6,14 +6,14 @@ def calcular_custo_viagem():
         distancia = float(input("Informe a distância percorrida (em km): "))
 
         print("""
-        0 - Preço do combustivel 6,36
+        0 - Preço do combustivel 6,59
         1 - Personalizado
         """)
 
         op1 = input("Informe a custo do Combustivel: ")
 
         if op1 == "0":
-            preco_combustivel = 6.63
+            preco_combustivel = 6.59
         elif op1 == "1":
             preco_combustivel = float(input("Informe o valor do combustível (R$/litro): "))
         else:
