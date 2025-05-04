@@ -63,5 +63,5 @@ def calcular_tempos_velocidades():
         print(f"Erro: {e}. Por favor, insira valores válidos.")
 
 
-# Executar a função
-calcular_tempos_velocidades()
+if __name__ == "__main__":
+    calcular_tempos_velocidades()
