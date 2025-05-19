@@ -8,6 +8,11 @@ class Veiculo:
         self.auto_cidade = auto_cidade
         self.auto_estrada = auto_estrada
 
+    def auto_total(self):
+        auto_total_cidade =round(self.auto_cidade * self.capa_tanque, 2)
+        auto_total_estrada = round(self.auto_estrada * self.capa_tanque, 2)
+        return [auto_total_cidade, auto_total_estrada]
+
     def exibir(self):
         print(f"ID: {self.id}\n"
               f"Modelo: {self.modelo}\n"
